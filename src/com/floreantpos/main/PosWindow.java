@@ -116,6 +116,7 @@ public class PosWindow extends JFrame implements WindowListener {
 	}
 
 	public void windowActivated(WindowEvent e) {
+		Application.getTakeOutView();
 	}
 
 	public void windowDeactivated(WindowEvent e) {

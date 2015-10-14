@@ -40,6 +40,7 @@ public class OrderInfoDialog extends POSDialog {
 		PosButton btnClose = new PosButton();
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//Application.getTakeOutView();
 				dispose();
 			}
 		});

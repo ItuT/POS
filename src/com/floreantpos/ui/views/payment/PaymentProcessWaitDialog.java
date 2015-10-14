@@ -17,13 +17,16 @@ public class PaymentProcessWaitDialog extends JDialog {
 		JLabel label = new JLabel(Messages.getString("PaymentProcessWaitDialog.1")); //$NON-NLS-1$
 		label.setHorizontalAlignment(JLabel.CENTER);
 		label.setFont(label.getFont().deriveFont(24).deriveFont(Font.BOLD));
-		add(label);
+		getContentPane().add(label);
 		
 		setSize(500, 400);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setLocationRelativeTo(parent);
 	}
 
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public PaymentProcessWaitDialog(JFrame parent) {
 		super(parent, false);
 		setTitle(Messages.getString("PaymentProcessWaitDialog.2")); //$NON-NLS-1$
@@ -31,7 +34,7 @@ public class PaymentProcessWaitDialog extends JDialog {
 		JLabel label = new JLabel(Messages.getString("PaymentProcessWaitDialog.3")); //$NON-NLS-1$
 		label.setHorizontalAlignment(JLabel.CENTER);
 		label.setFont(label.getFont().deriveFont(24).deriveFont(Font.BOLD));
-		add(label);
+		getContentPane().add(label);
 		
 		setSize(500, 400);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);

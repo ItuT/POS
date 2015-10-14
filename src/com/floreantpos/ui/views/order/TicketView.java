@@ -70,6 +70,8 @@ import com.floreantpos.ui.views.order.actions.OrderListener;
 import com.floreantpos.util.NumberUtil;
 import com.floreantpos.util.POSUtil;
 import com.floreantpos.util.PosGuiUtil;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 /**
  * 
@@ -104,6 +106,7 @@ public class TicketView extends JPanel {
 		btnDecreaseAmount = new com.floreantpos.swing.PosButton();
 		btnScrollDown = new com.floreantpos.swing.PosButton();
 		ticketViewerTable = new com.floreantpos.ui.ticket.TicketViewerTable();
+		ticketViewerTable.setFont(new Font("Tahoma", Font.BOLD, 18));
 		ticketScrollPane = new PosScrollPane(ticketViewerTable);
 		ticketScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		ticketScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -156,7 +159,7 @@ public class TicketView extends JPanel {
 		});
 
 		getExtraActionPanel().updateView(null);
-		setPreferredSize(new java.awt.Dimension(480, 463));
+		setPreferredSize(new Dimension(1024, 768));
 
 	}// </editor-fold>//GEN-END:initComponents
 
@@ -202,31 +205,36 @@ public class TicketView extends JPanel {
 
 	private JPanel createTotalViewerPanel() {
 		lblSubtotal = new javax.swing.JLabel();
+		lblSubtotal.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblSubtotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 		lblSubtotal.setText(com.floreantpos.POSConstants.SUBTOTAL + ":"); //$NON-NLS-1$
 
 		tfSubtotal = new javax.swing.JTextField(10);
+		tfSubtotal.setFont(new Font("Tahoma", Font.BOLD, 18));
 		tfSubtotal.setHorizontalAlignment(SwingConstants.TRAILING);
 		tfSubtotal.setEditable(false);
 		
 		tfDiscount = new javax.swing.JTextField(10);
+		tfDiscount.setFont(new Font("Tahoma", Font.BOLD, 18));
 		tfDiscount.setHorizontalAlignment(SwingConstants.TRAILING);
 		tfDiscount.setEditable(false);
 
 		lblTax = new javax.swing.JLabel();
+		lblTax.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblTax.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-		lblTax.setText(com.floreantpos.POSConstants.TAX + ":"); //$NON-NLS-1$
+		lblTax.setText(Messages.getString("TicketView.lblTax.text")); //$NON-NLS-1$ //$NON-NLS-1$
 
 		tfTax = new javax.swing.JTextField();
+		tfTax.setFont(new Font("Tahoma", Font.BOLD, 18));
 		tfTax.setEditable(false);
 		tfTax.setHorizontalAlignment(SwingConstants.TRAILING);
 
 		lblTotal = new javax.swing.JLabel();
-		lblTotal.setFont(lblTotal.getFont().deriveFont(Font.BOLD, 16));
+		lblTotal.setFont(lblTotal.getFont().deriveFont(24f));
 		lblTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 		lblTotal.setText(com.floreantpos.POSConstants.TOTAL + ":"); //$NON-NLS-1$
 		tfTotal = new javax.swing.JTextField(10);
-		tfTotal.setFont(tfTotal.getFont().deriveFont(Font.BOLD, 16));
+		tfTotal.setFont(tfTotal.getFont().deriveFont(tfTotal.getFont().getStyle() | Font.BOLD, 24f));
 		tfTotal.setHorizontalAlignment(SwingConstants.TRAILING);
 		tfTotal.setEditable(false);
 
@@ -234,7 +242,9 @@ public class TicketView extends JPanel {
 
 		ticketAmountPanel.add(lblSubtotal, "growx,aligny center"); //$NON-NLS-1$
 		ticketAmountPanel.add(tfSubtotal, "growx,aligny center"); //$NON-NLS-1$
-		ticketAmountPanel.add(new JLabel(Messages.getString("TicketView.9"), JLabel.TRAILING), "newline,growx,aligny center"); //$NON-NLS-1$ //$NON-NLS-2$
+		JLabel label = new JLabel(Messages.getString("TicketView.9"), JLabel.TRAILING);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		ticketAmountPanel.add(label, "newline,growx,aligny center"); //$NON-NLS-1$ //$NON-NLS-2$
 		ticketAmountPanel.add(tfDiscount, "growx,aligny center"); //$NON-NLS-1$
 		ticketAmountPanel.add(lblTax, "newline,growx,aligny center"); //$NON-NLS-1$
 		ticketAmountPanel.add(tfTax, "growx,aligny center"); //$NON-NLS-1$
@@ -371,10 +381,12 @@ public class TicketView extends JPanel {
 			// CashierModeNextActionDialog dialog = new
 			// CashierModeNextActionDialog((Frame) ancestor, message);
 			// dialog.open();
-			RootView.getInstance().showView(CashierSwitchBoardView.VIEW_NAME);
+			//RootView.getInstance().showView(CashierSwitchBoardView.VIEW_NAME);
+			SwitchboardView.getInstance().goToTakeOutView();
 		}
 		else {
-			RootView.getInstance().showView(SwitchboardView.VIEW_NAME);
+		//	RootView.getInstance().showView(SwitchboardView.VIEW_NAME);
+			SwitchboardView.getInstance().goToTakeOutView();
 		}
 	}
 
@@ -662,7 +674,7 @@ public class TicketView extends JPanel {
 	public static void main(String[] args) {
 		TicketView ticketView = new TicketView();
 		JFrame frame = new JFrame();
-		frame.add(ticketView);
+		frame.getContentPane().add(ticketView);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
@@ -674,7 +686,7 @@ public class TicketView extends JPanel {
 		/** Creates new form OthersView */
 		private ExtraTicketActionPanel() {
 			initComponents();
-			
+			setItemSelectionListener(itemSelectionListener);
 			setAnimated(true);
 		}
 
@@ -989,18 +1001,36 @@ public class TicketView extends JPanel {
 		}
 
 		public void searchItem() {
-			int itemId = NumberSelectionDialog2.takeIntInput(Messages.getString("TicketView.44")); //$NON-NLS-1$
-
-			if (itemId == -1) {
+			//int itemId = NumberSelectionDialog2.takeIntInput(Messages.getString("TicketView.44")); //$NON-NLS-1$
+			
+			String _barcode = Integer.toString(NumberSelectionDialog2.takeIntInput(Messages.getString("TicketView.44")));
+			
+			//if (itemId == -1) {
+				//return;
+			//}
+			
+			if (_barcode.isEmpty()) {
 				return;
 			}
 
-			MenuItem menuItem = MenuItemDAO.getInstance().get(itemId);
-			if (menuItem == null) {
+			//MenuItem menuItem = MenuItemDAO.getInstance().get(itemId);
+			//if (menuItem == null) {
+				//POSMessageDialog.showError(Application.getPosWindow(), Messages.getString("TicketView.45")); //$NON-NLS-1$
+				//return;
+			//}
+			
+			MenuItem _menuItem = MenuItemDAO.getInstance().getWithBarcode(_barcode).get(0);// getSimilar(_barcode, null).get(0);
+			if (_menuItem == null) {
 				POSMessageDialog.showError(Application.getPosWindow(), Messages.getString("TicketView.45")); //$NON-NLS-1$
 				return;
 			}
-			itemSelectionListener.itemSelected(menuItem);
+			
+			System.out.println(_menuItem.getBarcode());
+			System.out.println(_menuItem.getName());
+			System.out.println(_menuItem.getDisplayName());
+			
+			itemSelectionListener.itemSelected(_menuItem);
 		}
 	}
+
 }

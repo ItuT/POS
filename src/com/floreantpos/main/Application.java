@@ -73,6 +73,8 @@ public class Application {
 	private PosPrinters printers;
 
 	private static Application instance;
+	
+	public SwitchboardView sbv;
 
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM, yyyy"); //$NON-NLS-1$
 	private static ImageIcon applicationIcon;
@@ -406,7 +408,9 @@ public class Application {
 			}
 		}
 		else {
-			rootView.showView(SwitchboardView.getInstance());
+			sbv = SwitchboardView.getInstance();
+			rootView.showView(sbv);
+			sbv.goToTakeOutView();
 		}
 	}
 
@@ -434,6 +438,10 @@ public class Application {
 
 	public static PosWindow getPosWindow() {
 		return getInstance().posWindow;
+	}
+	
+	public static void getTakeOutView() {
+		getInstance().sbv.goToTakeOutView();
 	}
 
 	public Terminal getTerminal() {

@@ -42,6 +42,9 @@ public abstract class SelectionView extends JPanel implements ComponentListener 
 	@SuppressWarnings("unused")
 	private String title;
 
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public SelectionView(String title, int buttonWidth, int buttonHeight) {
 		this.title = title;
 		this.buttonSize = new Dimension(buttonWidth, buttonHeight);
@@ -80,6 +83,9 @@ public abstract class SelectionView extends JPanel implements ComponentListener 
 
 	}
 
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public SelectionView(String title) {
 		this(title, 120, 80);
 	}

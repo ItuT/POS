@@ -600,9 +600,8 @@ public class SwitchboardView extends ViewPanel implements ActionListener, ITicke
 				}
 			}
 		}
-
+		
 		updateTicketList();
-
 	}
 
 	public synchronized void updateTicketList() {
@@ -731,5 +730,10 @@ public class SwitchboardView extends ViewPanel implements ActionListener, ITicke
 
 		ticketsListPanelBorder.setTitle(title);
 
+	}
+	
+	public void goToTakeOutView()
+	{
+		OrderUtil.createNewTakeOutOrder(OrderType.TAKE_OUT);
 	}
 }

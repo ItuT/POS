@@ -120,7 +120,29 @@ public class MenuItemDAO extends BaseMenuItemDAO {
 		}
 
 		return criteria.list();
-
+	}
+	
+	public List<MenuItem> getWithBarcode(String itemBarcode_)
+	{
+		Session _session = null;
+		Criteria _criteria = null;
+		String _itemBarcode = itemBarcode_;
+		
+		try 
+		{
+			_session = getSession();
+			_criteria = _session.createCriteria(MenuItem.class);
+			
+			if (StringUtils.isNotEmpty(_itemBarcode))
+			{
+				_criteria.add(Restrictions.ilike(MenuItem.PROP_BARCODE, _itemBarcode.trim()));
+			}
+		}
+		catch(Exception e)
+		{
+		}
+		
+		return _criteria.list();
 	}
 
 }
