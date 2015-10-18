@@ -76,7 +76,7 @@ public class OrderView extends ViewPanel {
     private void initComponents() {
         categoryView = new com.floreantpos.ui.views.order.CategoryView();
         ticketView = new com.floreantpos.ui.views.order.TicketView();
-        othersView = ticketView.getExtraActionPanel();
+        //othersView = ticketView.getExtraActionPanel();
         jPanel1 = new com.floreantpos.swing.TransparentPanel();
         midContainer = new com.floreantpos.swing.TransparentPanel();
 
@@ -91,7 +91,7 @@ public class OrderView extends ViewPanel {
         jPanel1.setBackground(new java.awt.Color(51, 153, 0));
         jPanel1.add(midContainer, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(othersView, java.awt.BorderLayout.SOUTH);
+       // jPanel1.add(othersView, java.awt.BorderLayout.SOUTH);
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -100,7 +100,7 @@ public class OrderView extends ViewPanel {
     private com.floreantpos.ui.views.order.CategoryView categoryView;
     private com.floreantpos.swing.TransparentPanel jPanel1;
     private com.floreantpos.swing.TransparentPanel midContainer;
-    private TicketView.ExtraTicketActionPanel othersView;
+   // private TicketView.ExtraTicketActionPanel othersView;
     private com.floreantpos.ui.views.order.TicketView ticketView;
     // End of variables declaration//GEN-END:variables
     
@@ -179,9 +179,9 @@ public class OrderView extends ViewPanel {
 	public void resetView() {
 	}
 
-	public TicketView.ExtraTicketActionPanel getOthersView() {
-		return othersView;
-	}
+	//public TicketView.ExtraTicketActionPanel getOthersView() {
+		//return othersView;
+	//}
 	
 	@Override
 	public void setVisible(boolean aFlag) {
