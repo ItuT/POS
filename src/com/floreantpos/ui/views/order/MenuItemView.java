@@ -60,7 +60,7 @@ public class MenuItemView extends SelectionView {
 
 		MenuItemDAO dao = new MenuItemDAO();
 		try {
-			List<MenuItem> items = dao.findByParent(menuGroup, false);
+			List<MenuItem> items = dao.findAll();// findByParent(menuGroup, false);
 			setBackEnable(items.size() > 0);
 			
 			setItems(items);
@@ -73,6 +73,7 @@ public class MenuItemView extends SelectionView {
 	protected AbstractButton createItemButton(Object item) {
 		MenuItem menuItem = (MenuItem) item;
 		ItemButton itemButton = new ItemButton(menuItem);
+		itemButton.setSize(10,10);
 		menuItemButtonMap.put(menuItem.getId(), itemButton);
 		
 		return itemButton;
@@ -86,13 +87,13 @@ public class MenuItemView extends SelectionView {
 		listenerList.remove(listener);
 	}
 
-	private void fireItemSelected(MenuItem foodItem) {
+	public void fireItemSelected(MenuItem foodItem) {
 		for (ItemSelectionListener listener : listenerList) {
 			listener.itemSelected(foodItem);
 		}
 	}
 
-	private void fireBackFromItemSelected() {
+	public void fireBackFromItemSelected() {
 		for (ItemSelectionListener listener : listenerList) {
 			listener.itemSelectionFinished(menuGroup);
 		}
@@ -106,7 +107,7 @@ public class MenuItemView extends SelectionView {
 	}
 
 	private class ItemButton extends PosButton implements ActionListener {
-		private static final int BUTTON_SIZE = 100;
+		private static final int BUTTON_SIZE = 10;
 		MenuItem foodItem;
 
 		ItemButton(MenuItem menuItem) {
@@ -119,22 +120,28 @@ public class MenuItemView extends SelectionView {
 			if(menuItem.getImage() != null) {
 				int w = BUTTON_SIZE - 10;
 				int h = BUTTON_SIZE - 10;
-				
 				if(menuItem.isShowImageOnly()) {
 					setIcon(menuItem.getScaledImage(w, h));
 				}
+				else
+				{
+					setText("<html><body><center>" + menuItem.getName() + "</center></body></html>"); //$NON-NLS-1$ //$NON-NLS-2$
+				}
+				
+				/*
 				else {
-					w = 80;
-					h = 40;
+					w = 20;
+					h = 10;
 					
-					setIcon(menuItem.getScaledImage(w, h));
+					//setIcon(menuItem.getScaledImage(w, h));
 					setText("<html><body><center>" + menuItem.getDisplayName() + "</center></body></html>"); //$NON-NLS-1$ //$NON-NLS-2$
 				}
 				
 			}
 			else {
 				setText("<html><body><center>" + menuItem.getName() + "</center></body></html>"); //$NON-NLS-1$ //$NON-NLS-2$
-			}
+			}*/
+			}// delete on uncomment of the above
 			
 			if(menuItem.getButtonColor() != null) {
 				setBackground(new Color(menuItem.getButtonColor()));
@@ -156,4 +163,5 @@ public class MenuItemView extends SelectionView {
 	public void doGoBack() {
 		fireBackFromItemSelected();
 	}
+
 }

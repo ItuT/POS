@@ -160,7 +160,7 @@ public class TicketView extends JPanel {
 		});
 
 		//getExtraActionPanel().updateView(null);
-		setPreferredSize(new Dimension(1024, 768));
+		setPreferredSize(new Dimension(800, 600));
 
 	}// </editor-fold>//GEN-END:initComponents
 	

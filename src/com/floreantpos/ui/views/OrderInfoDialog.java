@@ -40,8 +40,10 @@ public class OrderInfoDialog extends POSDialog {
 		PosButton btnClose = new PosButton();
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Application.getTakeOutView();
-				dispose();
+				Application.getInstance();
+				//SwitchboardView.getInstance().goToTakeOutView();
+				//RootView.getInstance().showView(CashierSwitchBoardView.VIEW_NAME);
+				//dispose();
 			}
 		});
 		btnClose.setText(Messages.getString("OrderInfoDialog.2")); //$NON-NLS-1$

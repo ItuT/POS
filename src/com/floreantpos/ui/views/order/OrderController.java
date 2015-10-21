@@ -38,6 +38,7 @@ public class OrderController implements OrderListener, CategorySelectionListener
 		orderView.getCategoryView().addCategorySelectionListener(this);
 		orderView.getGroupView().addGroupSelectionListener(this);
 		orderView.getItemView().addItemSelectionListener(this);
+		orderView.getListView().addItemSelectionListener(this);
 		orderView.getTicketView().setItemSelectionListener(this);
 		orderView.getModifierView().addModifierSelectionListener(this);
 		orderView.getTicketView().addOrderListener(this);
@@ -49,7 +50,7 @@ public class OrderController implements OrderListener, CategorySelectionListener
 	}
 
 	public void groupSelected(MenuGroup foodGroup) {
-		orderView.showView(MenuItemView.VIEW_NAME);
+		orderView.showView(MenuListView.VIEW_NAME);
 		orderView.getItemView().setMenuGroup(foodGroup);
 	}
 
@@ -86,7 +87,7 @@ public class OrderController implements OrderListener, CategorySelectionListener
 		if (!menuCategory.equals(groupView.getMenuCategory())) {
 			groupView.setMenuCategory(menuCategory);
 		}
-		orderView.showView(GroupView.VIEW_NAME);
+		orderView.showView(MenuItemView.VIEW_NAME);
 	}
 
 	public void modifierSelectionFiniched(MenuItem parent) {
@@ -95,7 +96,7 @@ public class OrderController implements OrderListener, CategorySelectionListener
 		if (!menuGroup.equals(itemView.getMenuGroup())) {
 			itemView.setMenuGroup(menuGroup);
 		}
-		orderView.showView(MenuItemView.VIEW_NAME);
+		orderView.showView(MenuListView.VIEW_NAME);
 	}
 
 	public void payOrderSelected(Ticket ticket) {
