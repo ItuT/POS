@@ -55,6 +55,7 @@ import com.floreantpos.model.dao.MenuItemDAO;
 import com.floreantpos.model.dao.ShopTableDAO;
 import com.floreantpos.model.dao.TicketDAO;
 import com.floreantpos.report.ReceiptPrintService;
+import com.floreantpos.swing.POSTextField;
 import com.floreantpos.swing.POSToggleButton;
 import com.floreantpos.swing.PosButton;
 import com.floreantpos.swing.PosScrollPane;
@@ -70,7 +71,9 @@ import com.floreantpos.ui.views.order.actions.OrderListener;
 import com.floreantpos.util.NumberUtil;
 import com.floreantpos.util.POSUtil;
 import com.floreantpos.util.PosGuiUtil;
+
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
 
 /**
@@ -173,7 +176,7 @@ public class TicketView extends JPanel {
 	public void searchItem() {
 		//int itemId = NumberSelectionDialog2.takeIntInput(Messages.getString("TicketView.44")); //$NON-NLS-1$
 		
-		String _barcode = Integer.toString(NumberSelectionDialog2.takeIntInput(Messages.getString("TicketView.44")));
+		String _barcode = btnMore.getText();//Integer.toString(NumberSelectionDialog2.takeIntInput(Messages.getString("TicketView.44")));
 		
 		//if (itemId == -1) {
 			//return;
@@ -513,7 +516,7 @@ public class TicketView extends JPanel {
 	private com.floreantpos.swing.PosButton btnSave;
 	private com.floreantpos.swing.PosButton btnIncreaseAmount = new PosButton(IconFactory.getIcon("/ui_icons/", "add_user.png")); //$NON-NLS-1$ //$NON-NLS-2$
 	private com.floreantpos.swing.PosButton btnPay;
-	private com.floreantpos.swing.POSToggleButton btnMore = new POSToggleButton(POSConstants.MORE_ACTIVITY_BUTTON_TEXT);
+	private com.floreantpos.swing.POSTextField btnMore = new POSTextField("BARCODE");
 	private com.floreantpos.swing.PosButton btnScrollDown;
 	private com.floreantpos.swing.PosButton btnScrollUp = new PosButton(IconFactory.getIcon("/ui_icons/", "up.png")); //$NON-NLS-1$ //$NON-NLS-2$
 	private javax.swing.JLabel lblTax;
