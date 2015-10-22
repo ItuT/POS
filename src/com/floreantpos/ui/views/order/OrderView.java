@@ -12,25 +12,13 @@ import java.util.List;
 
 import javax.swing.JComponent;
 
-import com.floreantpos.Messages;
-import com.floreantpos.POSConstants;
-import com.floreantpos.bo.ui.BOMessageDialog;
 import com.floreantpos.main.Application;
-import com.floreantpos.model.MenuGroup;
 import com.floreantpos.model.MenuItem;
 import com.floreantpos.model.Ticket;
-import com.floreantpos.model.dao.MenuItemDAO;
 import com.floreantpos.ui.dialog.POSMessageDialog;
 
-import javax.swing.JTextField;
+//import javax.swing.JTextField;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 /**
  *
@@ -116,7 +104,7 @@ public class OrderView extends ViewPanel {
        // jPanel1.add(othersView, java.awt.BorderLayout.SOUTH);
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
-        
+        /*
         textField = new JTextField();
         textField.addKeyListener(new KeyAdapter() {
         	@Override
@@ -141,7 +129,7 @@ public class OrderView extends ViewPanel {
         	}
         });
         jPanel1.add(textField, BorderLayout.NORTH);
-        textField.setColumns(10);
+        textField.setColumns(10);*/
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -158,7 +146,7 @@ public class OrderView extends ViewPanel {
 	private MenuListView itemListView;
 	private ModifierView modifierView;
 	private OrderController orderController;
-	private JTextField textField;
+	//private JTextField textField;
 	List<MenuItem> similarItem = null;
 	
 	public void showView(final String viewName) {

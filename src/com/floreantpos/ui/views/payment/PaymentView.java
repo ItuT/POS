@@ -20,6 +20,7 @@ import com.floreantpos.IconFactory;
 import com.floreantpos.Messages;
 import com.floreantpos.POSConstants;
 import com.floreantpos.model.Gratuity;
+import com.floreantpos.model.PaymentType;
 import com.floreantpos.model.Ticket;
 import com.floreantpos.model.dao.TicketDAO;
 import com.floreantpos.swing.PosButton;
@@ -27,6 +28,9 @@ import com.floreantpos.ui.dialog.POSMessageDialog;
 import com.floreantpos.util.NumberUtil;
 
 public class PaymentView extends JPanel {
+	
+	PaymentType selectedPaymentType;
+	
 	private static final String ADD = "0"; //$NON-NLS-1$
 
 	private static final String REMOVE = "1"; //$NON-NLS-1$

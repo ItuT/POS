@@ -27,54 +27,37 @@ import javax.swing.event.ListSelectionListener;
 
 import net.miginfocom.swing.MigLayout;
 
-import org.hibernate.Session;
 import org.hibernate.StaleObjectStateException;
-import org.jdesktop.swingx.JXCollapsiblePane;
-
 import com.floreantpos.IconFactory;
 import com.floreantpos.Messages;
 import com.floreantpos.POSConstants;
 import com.floreantpos.PosException;
 import com.floreantpos.config.TerminalConfig;
-import com.floreantpos.customer.CustomerSelectionDialog;
-import com.floreantpos.extension.FloorLayoutPlugin;
 import com.floreantpos.main.Application;
 import com.floreantpos.model.CookingInstruction;
 import com.floreantpos.model.ITicketItem;
 import com.floreantpos.model.MenuCategory;
 import com.floreantpos.model.MenuGroup;
 import com.floreantpos.model.MenuItem;
-import com.floreantpos.model.OrderType;
-import com.floreantpos.model.ShopTable;
 import com.floreantpos.model.Ticket;
 import com.floreantpos.model.TicketItem;
 import com.floreantpos.model.TicketItemCookingInstruction;
 import com.floreantpos.model.TicketItemModifier;
 import com.floreantpos.model.dao.CookingInstructionDAO;
 import com.floreantpos.model.dao.MenuItemDAO;
-import com.floreantpos.model.dao.ShopTableDAO;
 import com.floreantpos.model.dao.TicketDAO;
 import com.floreantpos.report.ReceiptPrintService;
 import com.floreantpos.swing.POSTextField;
-import com.floreantpos.swing.POSToggleButton;
 import com.floreantpos.swing.PosButton;
 import com.floreantpos.swing.PosScrollPane;
 import com.floreantpos.ui.dialog.BeanEditorDialog;
-import com.floreantpos.ui.dialog.MiscTicketItemDialog;
-import com.floreantpos.ui.dialog.NumberSelectionDialog2;
 import com.floreantpos.ui.dialog.POSMessageDialog;
-import com.floreantpos.ui.views.CashierSwitchBoardView;
 import com.floreantpos.ui.views.CookingInstructionSelectionView;
 import com.floreantpos.ui.views.SwitchboardView;
 import com.floreantpos.ui.views.order.actions.ItemSelectionListener;
 import com.floreantpos.ui.views.order.actions.OrderListener;
 import com.floreantpos.util.NumberUtil;
 import com.floreantpos.util.POSUtil;
-import com.floreantpos.util.PosGuiUtil;
-
-import javax.swing.border.LineBorder;
-
-import java.awt.Color;
 
 /**
  * 
@@ -186,6 +169,7 @@ public class TicketView extends JPanel {
 			return;
 		}
 
+		btnMore.setText(null);//clear 
 		//MenuItem menuItem = MenuItemDAO.getInstance().get(itemId);
 		//if (menuItem == null) {
 			//POSMessageDialog.showError(Application.getPosWindow(), Messages.getString("TicketView.45")); //$NON-NLS-1$
