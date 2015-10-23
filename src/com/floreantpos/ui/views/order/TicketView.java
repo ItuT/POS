@@ -176,13 +176,21 @@ public class TicketView extends JPanel {
 			//return;
 		//}
 		
-		MenuItem _menuItem = MenuItemDAO.getInstance().getWithBarcode(_barcode).get(0);// getSimilar(_barcode, null).get(0);
-		if (_menuItem == null) {
+		MenuItem _menuItem;
+		List<MenuItem> _menuItemList = MenuItemDAO.getInstance().getWithBarcode(_barcode);
+		
+		if(_menuItemList.isEmpty())
+		{
+			System.out.println("_menuItem");
 			POSMessageDialog.showError(Application.getPosWindow(), Messages.getString("TicketView.45")); //$NON-NLS-1$
 			return;
 		}
+		else
+		{
+			_menuItem = _menuItemList.get(0);// getSimilar(_barcode, null).get(0);	
+		}
 		
-		System.out.println(_menuItem.getBarcode());
+		
 		System.out.println(_menuItem.getName());
 		System.out.println(_menuItem.getDisplayName());
 		

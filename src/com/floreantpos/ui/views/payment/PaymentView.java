@@ -26,6 +26,7 @@ import com.floreantpos.model.dao.TicketDAO;
 import com.floreantpos.swing.PosButton;
 import com.floreantpos.ui.dialog.POSMessageDialog;
 import com.floreantpos.util.NumberUtil;
+import java.awt.Font;
 
 public class PaymentView extends JPanel {
 	
@@ -91,10 +92,12 @@ public class PaymentView extends JPanel {
 		jLabel4 = new javax.swing.JLabel();
 		jLabel6 = new javax.swing.JLabel();
 		tfDueAmount = new com.floreantpos.swing.FocusedTextField();
+		tfDueAmount.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		tfDueAmount.setFocusable(false);
 		tfAmountTendered = new com.floreantpos.swing.FocusedTextField();
+		tfAmountTendered.setFont(new Font("Tahoma", Font.PLAIN, 22));
 
-		setLayout(new MigLayout("", "[fill,grow]", "[73px][grow,fill][grow,fill][][shrink 0]")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		setLayout(new MigLayout("", "[grow,fill]", "[73px][grow,fill][grow,fill][][shrink 0]")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 
 		calcButtonPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 0, 5));
 		calcButtonPanel.setLayout(new java.awt.GridLayout(0, 3, 5, 5));
@@ -253,7 +256,7 @@ public class PaymentView extends JPanel {
 
 		add(transparentPanel1, "cell 0 0,growx,aligny top"); //$NON-NLS-1$
 
-		transparentPanel1.setLayout(new MigLayout("", "[][grow,fill]", "[19px][][19px]")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		transparentPanel1.setLayout(new MigLayout("", "[][grow,fill]", "[30px][][30px]")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		transparentPanel1.add(jLabel4, "cell 0 0,alignx right,aligny center"); //$NON-NLS-1$
 
 		transparentPanel1.add(jLabel6, "cell 0 2,alignx left,aligny center"); //$NON-NLS-1$

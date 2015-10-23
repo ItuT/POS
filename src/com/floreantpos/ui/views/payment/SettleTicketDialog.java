@@ -221,16 +221,16 @@ public class SettleTicketDialog extends POSDialog implements CardInputListener {
 				return;
 			}
 
-			PaymentTypeSelectionDialog paymentTypeSelectionDialog = new PaymentTypeSelectionDialog();
-			paymentTypeSelectionDialog.setResizable(false);
-			paymentTypeSelectionDialog.pack();
-			paymentTypeSelectionDialog.open();
-			if (paymentTypeSelectionDialog.isCanceled()) {
-				return;
-			}
+			//PaymentTypeSelectionDialog paymentTypeSelectionDialog = new PaymentTypeSelectionDialog();
+			//paymentTypeSelectionDialog.setResizable(false);
+			//paymentTypeSelectionDialog.pack();
+			//paymentTypeSelectionDialog.open();
+			//if (paymentTypeSelectionDialog.isCanceled()) {
+			//	return;
+			//}
 
-			paymentType = paymentTypeSelectionDialog.getSelectedPaymentType();
-			cardName = paymentType.getDisplayString();
+			this.paymentType = paymentType.CASH;//paymentTypeSelectionDialog.getSelectedPaymentType();
+			//cardName = paymentType.getDisplayString();
 			PosTransaction transaction = null;
 
 			switch (paymentType) {
