@@ -37,6 +37,7 @@ import com.floreantpos.bo.actions.DrawerPullReportExplorerAction;
 import com.floreantpos.bo.actions.GroupExplorerAction;
 import com.floreantpos.bo.actions.HourlyLaborReportAction;
 import com.floreantpos.bo.actions.ItemExplorerAction;
+import com.floreantpos.bo.actions.InventoryExplorerAction;
 import com.floreantpos.bo.actions.JournalReportAction;
 import com.floreantpos.bo.actions.KeyStatisticsSalesReportAction;
 import com.floreantpos.bo.actions.MenuUsageReportAction;
@@ -127,6 +128,7 @@ public class BackOfficeWindow extends javax.swing.JFrame {
 			createAdminMenu(menuBar);
 			createExplorerMenu(menuBar);
 			createReportMenu(menuBar);
+			createInventoryMenu(menuBar);
 		}
 		else {
 			if (permissions != null && permissions.contains(UserPermission.PERFORM_ADMINISTRATIVE_TASK)) {
@@ -134,6 +136,7 @@ public class BackOfficeWindow extends javax.swing.JFrame {
 			}
 			if (permissions != null && permissions.contains(UserPermission.VIEW_EXPLORERS)) {
 				createExplorerMenu(menuBar);
+				createInventoryMenu(menuBar);
 			}
 			if (permissions != null && permissions.contains(UserPermission.VIEW_REPORTS)) {
 				createReportMenu(menuBar);
@@ -204,6 +207,13 @@ public class BackOfficeWindow extends javax.swing.JFrame {
 		}
 		
 		plugin.createCustomerMenu(explorerMenu);
+	}
+	
+	private void createInventoryMenu(JMenuBar menuBar)
+	{
+		JMenu inventoryMenu = new JMenu("Inventory");
+		menuBar.add(inventoryMenu);
+		inventoryMenu.add(new InventoryExplorerAction());
 	}
 
 	private void createAdminMenu(JMenuBar menuBar) {

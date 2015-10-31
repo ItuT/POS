@@ -32,6 +32,10 @@ public abstract class BaseMenuItem  implements Comparable, Serializable {
 	public static String PROP_IMAGE = "image"; //$NON-NLS-1$
 	public static String PROP_ID = "id"; //$NON-NLS-1$
 	public static String PROP_TRANSLATED_NAME = "translatedName"; //$NON-NLS-1$
+	public static String PROP_STOCK_ONHAND = "stockOnhand"; //$NON-NLS-1$
+	public static String PROP_VOLUME = "volume"; //$NON-NLS-1$
+	public static String PROP_PACKAGE_COUNT = "packageCount"; //$NON-NLS-1$
+	public static String PROP_UNIT_BARCODE = "stock"; //$NON-NLS-1$
 
 
 	// constructors
@@ -85,12 +89,16 @@ public abstract class BaseMenuItem  implements Comparable, Serializable {
 		protected java.lang.Integer textColor;
 		protected byte[] image;
 		protected java.lang.Boolean showImageOnly;
+		protected java.lang.Integer stockOnhand;
+		protected java.lang.Double volume;
+		protected java.lang.Integer packageCount;
 
 	// many to one
 	private com.floreantpos.model.MenuGroup parent;
 	private com.floreantpos.model.Tax tax;
 	private com.floreantpos.model.Recepie recepie;
 	private com.floreantpos.model.PrinterGroup printerGroup;
+	private com.floreantpos.model.Stock stock;
 
 	// collections
 	private java.util.List<com.floreantpos.model.MenuItemShift> shifts;
@@ -363,7 +371,20 @@ public abstract class BaseMenuItem  implements Comparable, Serializable {
 		this.tax = tax;
 	}
 
-
+	/**
+	 * Return the value associated with the column: STOCK_ID
+	 */
+	public com.floreantpos.model.Stock getStock () {
+					return stock;
+	}
+	
+	/**
+	 * Set the value related to the column: STOCK_ID
+	 * @param stock the STOCK_ID value
+	 */
+	public void setTax (com.floreantpos.model.Stock stock) {
+		this.stock = stock;
+	}
 
 	/**
 	 * Return the value associated with the column: RECEPIE
@@ -396,7 +417,22 @@ public abstract class BaseMenuItem  implements Comparable, Serializable {
 	public void setPrinterGroup (com.floreantpos.model.PrinterGroup printerGroup) {
 		this.printerGroup = printerGroup;
 	}
+//----------------------------------------------------------------------------------
+	/**
+	 * Return the value associated with the column: StockOnhand
+	 */
+	public Integer getStockOnhand() {
+					return this.stockOnhand;
+			}
 
+	/**
+	 * Set the value related to the column: StockOnhand
+	 * @param printerGroup the PG_ID value
+	 */
+	public void setStockOnhand (Integer stockOnhand) {
+		this.stockOnhand = stockOnhand;
+	}
+//----------------------------------------------------------------------------------	
 
 
 	/**

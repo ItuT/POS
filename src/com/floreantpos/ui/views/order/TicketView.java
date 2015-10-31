@@ -7,6 +7,7 @@
 package com.floreantpos.ui.views.order;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -14,8 +15,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
@@ -28,6 +31,7 @@ import javax.swing.event.ListSelectionListener;
 import net.miginfocom.swing.MigLayout;
 
 import org.hibernate.StaleObjectStateException;
+
 import com.floreantpos.IconFactory;
 import com.floreantpos.Messages;
 import com.floreantpos.POSConstants;
@@ -158,7 +162,7 @@ public class TicketView extends JPanel {
 	
 	public void searchItem() {
 		//int itemId = NumberSelectionDialog2.takeIntInput(Messages.getString("TicketView.44")); //$NON-NLS-1$
-		
+		btnMore.setBackground(Color.WHITE);
 		String _barcode = btnMore.getText();//Integer.toString(NumberSelectionDialog2.takeIntInput(Messages.getString("TicketView.44")));
 		
 		//if (itemId == -1) {
@@ -181,20 +185,26 @@ public class TicketView extends JPanel {
 		
 		if(_menuItemList.isEmpty())
 		{
-			System.out.println("_menuItem");
-			POSMessageDialog.showError(Application.getPosWindow(), Messages.getString("TicketView.45")); //$NON-NLS-1$
+			//System.out.println("_menuItem");
+			//POSMessageDialog.showError(this, Messages.getString("TicketView.45")); //$NON-NLS-1$
+			//JOptionPane.showMessageDialog(Application.getInstance().getRootView(),Messages.getString("TicketView.45"));
+			//searchItem();
+			//
+			//btnMore.setText(Messages.getString("TicketView.45"));
+			btnMore.setBackground(Color.red);
 			return;
 		}
 		else
 		{
+			btnMore.setBackground(Color.WHITE);
 			_menuItem = _menuItemList.get(0);// getSimilar(_barcode, null).get(0);	
+			//System.out.println(_menuItem.getName());
+			//System.out.println(_menuItem.getDisplayName());
+			
+			itemSelectionListener.itemSelected(_menuItem);
 		}
 		
 		
-		System.out.println(_menuItem.getName());
-		System.out.println(_menuItem.getDisplayName());
-		
-		itemSelectionListener.itemSelected(_menuItem);
 	}
 
 	private void createTicketActionPanel() {

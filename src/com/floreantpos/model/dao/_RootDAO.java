@@ -133,6 +133,7 @@ public abstract class _RootDAO extends com.floreantpos.model.dao._BaseRootDAO {
 		configuration = configuration.addClass(PrinterGroup.class);
 		configuration = configuration.addClass(DrawerAssignedHistory.class);
 		configuration = configuration.addClass(DataUpdateInfo.class);
+		configuration = configuration.addClass(Stock.class);
 		
 		configuration = configureInventoryClasses(configuration);
 		
