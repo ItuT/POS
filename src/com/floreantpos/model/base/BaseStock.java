@@ -1,7 +1,7 @@
 package com.floreantpos.model.base;
 
 import java.io.Serializable;
-import java.lang.reflect.Constructor;
+
 
 /**
  * This is an object that contains data related to the STOCK table.
@@ -12,83 +12,115 @@ import java.lang.reflect.Constructor;
  *  table="STOCK"
  */
 
-public class BaseStock implements Comparable, Serializable{
+public abstract class BaseStock  implements Comparable, Serializable {
 
-	public static String REF = "STOCK";
-	public static String PROP_COUNT = "count";
-	
-	private int hashCode = Integer.MIN_VALUE;
-	// primary key
-	private java.lang.String id;
-	// fields
-	protected java.lang.Integer count;
-	
-	//Constructor
-	public BaseStock()
-	{
+	public static String REF = "Stock"; //$NON-NLS-1$
+	public static String PROP_NAME = "name"; //$NON-NLS-1$
+	public static String PROP_ID = "id"; //$NON-NLS-1$
+	public static String PROP_COUNT = "count"; //$NON-NLS-1$
+
+
+	// constructors
+	public BaseStock () {
 		initialize();
 	}
-	
+
 	/**
 	 * Constructor for primary key
 	 */
-	public BaseStock(java.lang.String id)
-	{
+	public BaseStock (java.lang.Integer id) {
 		this.setId(id);
 		initialize();
 	}
-	
+
 	/**
 	 * Constructor for required fields
 	 */
-	public BaseStock(java.lang.String id, java.lang.Integer count)
-	{
+	public BaseStock (
+		java.lang.Integer id,
+		java.lang.String name) {
+
 		this.setId(id);
-		this.setCount(count);
+		this.setName(name);
 		initialize();
 	}
-	
+
+	protected void initialize () {}
+
+
+
+	private int hashCode = Integer.MIN_VALUE;
+
+	// primary key
+	private java.lang.Integer id;
+
+	// fields
+		protected java.lang.String name;
+		protected Integer count;
+
+
+
 	/**
-	 * Set the value related to the column: NAME
-	 * @param name the NAME value
-	 */
-	private void setCount(java.lang.Integer count) {
-		this.count = count;
+	 * Return the unique identifier of this class
+     * @hibernate.id
+     *  generator-class="identity"
+     *  column="ID"
+     */
+	public java.lang.Integer getId () {
+		return id;
 	}
-	
-	/**
-	 * Return the value associated with the column: COUNT
-	 */
-	public java.lang.Integer getCount () {
-					return count;
-			}
 
-
-	private void initialize() {}
-	
 	/**
 	 * Set the unique identifier of this class
 	 * @param id the new ID
 	 */
-	private void setId(java.lang.String id) 
-	{
+	public void setId (java.lang.Integer id) {
 		this.id = id;
 		this.hashCode = Integer.MIN_VALUE;
 	}
-	
+
+
+
+
 	/**
-	 * Return the unique identifier of this class
-	 * @hibernate.id
-	 * column="ID"
+	 * Return the value associated with the column: NAME
 	 */
-	public java.lang.String getId()
-	{
-		return id;
+	public java.lang.String getName () {
+					return name;
+			}
+
+	/**
+	 * Set the value related to the column: NAME
+	 * @param name the NAME value
+	 */
+	public void setName (java.lang.String name) {
+		this.name = name;
 	}
-	
+
+
+
+	/**
+	 * Return the value associated with the column: COUNT
+	 */
+	public java.lang.Integer getCount () {
+									return count == null ? Integer.valueOf(0) : count;
+					}
+
+	/**
+	 * Set the value related to the column: COUNT
+	 * @param count the COUNT value
+	 */
+	public void setCount (java.lang.Integer count) {
+		this.count = count;
+	}
+
+
+
+
+
 	public boolean equals (Object obj) {
 		if (null == obj) return false;
-		if (!(obj instanceof com.floreantpos.model.Tax)) return false;
+		if (!(obj instanceof com.floreantpos.model.Stock)) return false;
 		else {
 			com.floreantpos.model.Stock stock = (com.floreantpos.model.Stock) obj;
 			if (null == this.getId() || null == stock.getId()) return false;
@@ -107,15 +139,15 @@ public class BaseStock implements Comparable, Serializable{
 		return this.hashCode;
 	}
 
-	@Override
-	public int compareTo(Object obj) {
+	public int compareTo (Object obj) {
 		if (obj.hashCode() > hashCode()) return 1;
 		else if (obj.hashCode() < hashCode()) return -1;
 		else return 0;
 	}
-	
+
 	public String toString () {
 		return super.toString();
 	}
-	
+
+
 }

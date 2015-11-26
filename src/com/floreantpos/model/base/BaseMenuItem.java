@@ -374,17 +374,17 @@ public abstract class BaseMenuItem  implements Comparable, Serializable {
 	/**
 	 * Return the value associated with the column: STOCK_ID
 	 */
-	public com.floreantpos.model.Stock getStock () {
+	/*public com.floreantpos.model.Stock getStock () {
 					return stock;
-	}
+	}*/
 	
 	/**
 	 * Set the value related to the column: STOCK_ID
 	 * @param stock the STOCK_ID value
 	 */
-	public void setTax (com.floreantpos.model.Stock stock) {
+	/*public void setTax (com.floreantpos.model.Stock stock) {
 		this.stock = stock;
-	}
+	}*/
 
 	/**
 	 * Return the value associated with the column: RECEPIE
@@ -421,17 +421,19 @@ public abstract class BaseMenuItem  implements Comparable, Serializable {
 	/**
 	 * Return the value associated with the column: StockOnhand
 	 */
-	public Integer getStockOnhand() {
+	/*public Integer getStockOnhand() {
 					return this.stockOnhand;
-			}
+			}*/
+	
 
 	/**
 	 * Set the value related to the column: StockOnhand
 	 * @param printerGroup the PG_ID value
 	 */
-	public void setStockOnhand (Integer stockOnhand) {
+	/*public void setStockOnhand (Integer stockOnhand) {
 		this.stockOnhand = stockOnhand;
-	}
+	}*/
+	
 //----------------------------------------------------------------------------------	
 
 
