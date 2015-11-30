@@ -45,15 +45,21 @@ import org.hibernate.Session;
 import com.floreantpos.Messages;
 import com.floreantpos.extension.InventoryPlugin;
 import com.floreantpos.main.Application;
+import com.floreantpos.model.InventoryItem;
 import com.floreantpos.model.MenuGroup;
 import com.floreantpos.model.MenuItem;
 import com.floreantpos.model.MenuItemModifierGroup;
 import com.floreantpos.model.MenuItemShift;
 import com.floreantpos.model.PrinterGroup;
+import com.floreantpos.model.Recepie;
+import com.floreantpos.model.RecepieItem;
 import com.floreantpos.model.Tax;
+import com.floreantpos.model.dao.InventoryItemDAO;
 import com.floreantpos.model.dao.MenuGroupDAO;
 import com.floreantpos.model.dao.MenuItemDAO;
 import com.floreantpos.model.dao.PrinterGroupDAO;
+import com.floreantpos.model.dao.RecepieDAO;
+import com.floreantpos.model.dao.RecepieItemDAO;
 import com.floreantpos.model.dao.TaxDAO;
 import com.floreantpos.swing.ComboBoxModel;
 import com.floreantpos.swing.DoubleDocument;
@@ -90,12 +96,114 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 
 		TaxDAO taxDAO = new TaxDAO();
 		List<Tax> taxes = taxDAO.findAll();
-		cbTax.setModel(new ComboBoxModel(taxes));
+		//cbTax.setModel(new ComboBoxModel(taxes));
 
 		menuItemModifierGroups = menuItem.getMenuItemModiferGroups();
 		shiftTable.setModel(shiftTableModel = new ShiftTableModel(menuItem.getShifts()));
 
 		setBean(menuItem);
+		
+		RecepieDAO recepieDAO = new RecepieDAO();// menuItem.getRecepie();
+		List<Recepie> recepies = recepieDAO.findAll();
+		
+		RecepieItemDAO recepieItemDAO = new RecepieItemDAO();// menuItem.getRecepie();
+		List<RecepieItem> recepieItems = recepieItemDAO.findAll();
+		
+		InventoryItemDAO inventoryItemDAO = new InventoryItemDAO();
+		List<InventoryItem> inventoryItems = inventoryItemDAO.findAll();
+		
+		MenuItemDAO menuitemDAO = new MenuItemDAO();
+		List<MenuItem> menuItems = menuitemDAO.findAll();
+		
+		for (InventoryItem inv: inventoryItems)
+		{
+			for (MenuItem mnt: menuItems)
+			{
+				if (menuItem.getRecepie() == null)
+				{
+					//Package barcode
+					if((inv.getPackageBarcode() != null) && (mnt.getBarcode() != null))
+					if(inv.getPackageBarcode().matches(mnt.getBarcode()))
+					{
+						boolean createNewRecepieItemPack = true;
+						for (RecepieItem rcp: recepieItems)
+						{
+							System.out.println("in rcp items with "+inv.getPackageBarcode()+" and "+mnt.getBarcode());
+							if(rcp.getInventoryItem() == inv)//if we have a recepie item with this inventory item
+							{
+								mnt.setRecepie(rcp.getRecepie());
+								rcp.setPercentage(inv.getUnitPerPackage()*1.0);// remove 6 pack
+								createNewRecepieItemPack = false;
+								recepieItemDAO.saveOrUpdate(rcp);
+								System.out.println("associate menuitem with inventory item");
+								continue;//exit the loop 
+								//updateModel();
+							}
+						}
+					}
+					//unit barcode
+					if((inv.getUnitBarcode() != null) && (mnt.getBarcode() != null))
+					if(inv.getUnitBarcode().matches(mnt.getBarcode()))
+					{
+						boolean createNewRecepieItem = true;
+						for (RecepieItem rcp: recepieItems)
+						{
+							System.out.println("in rcp items with "+inv.getUnitBarcode()+" and "+mnt.getBarcode());
+							if(rcp.getInventoryItem() == inv)//if we have a recepie item with this inventory item
+							{
+								mnt.setRecepie(rcp.getRecepie());
+								createNewRecepieItem = false;
+								System.out.println("associate menuitem with inventory item");
+								//updateModel();
+							}
+							
+						}
+						
+						if(createNewRecepieItem)
+						{
+							Recepie newrcp = new Recepie();
+							RecepieItem newrcpitem = new RecepieItem();
+							
+							mnt.setRecepie(newrcp);//set menuitem's recepie
+							menuitemDAO.saveOrUpdate(mnt);// move this saves out to save everytime but save time too
+							
+							newrcp.setMenuItem(mnt);
+							recepieDAO.saveOrUpdate(newrcp);
+							//newrcp.notify();
+							
+							newrcpitem.setRecepie(newrcp);// set recepietem's recepie
+							//newrcpitem.notify();
+							
+							newrcpitem.setInventoryItem(inv);//associate the inventory item
+							//newrcpitem.notify();
+							recepieItemDAO.saveOrUpdate(newrcpitem);// 
+							
+							System.out.println("create new model items  ");
+							
+							
+						}
+						updateModel();
+					}//end if matches
+				
+				}// end if check menuItem has recepie
+			}
+		}
+		
+		for (Recepie rcp: recepies)
+		{
+			//System.out.println("RECEPIES  " + rcp.getMenuItem());
+			if (rcp.getRecepieItems() != null)
+			System.out.println("RCP INV ITEM  " + rcp.getRecepieItems().get(0).getInventoryItem());
+		}
+		//int i = 0;
+		for (RecepieItem rcp: recepieItems)
+		{
+			//System.out.println("R ITEMS  " + rcp.getInventoryItem());
+			if (menuItem.getRecepie() != null)
+			System.out.println("MENU RECEPIE  " + menuItem.getRecepie().getRecepieItems().get(0).getInventoryItem());
+		}
+		
+		cbTax.setModel(new ComboBoxModel(taxes));
 	}
 
 	protected void doSelectImageFile() {
@@ -597,7 +705,7 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		}
 
 		cbGroup.setSelectedItem(menuItem.getParent());
-		cbTax.setSelectedItem(menuItem.getTax());
+		cbTax.setSelectedItem(menuItem.getTax());//cbTax.setSelectedItem(menuItem.getRecepie());
 
 		cbPrinterGroup.setSelectedItem(menuItem.getPrinterGroup());
 
@@ -630,7 +738,7 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		menuItem.setBarcode(tfBarcode.getText());
 		menuItem.setParent((MenuGroup) cbGroup.getSelectedItem());
 		menuItem.setPrice(Double.valueOf(tfPrice.getText()));
-		menuItem.setTax((Tax) cbTax.getSelectedItem());
+		menuItem.setTax((Tax) cbTax.getSelectedItem());//setRecepie((Recepie) cbTax.getSelectedItem());
 		menuItem.setVisible(chkVisible.isSelected());
 		menuItem.setShowImageOnly(cbShowTextWithImage.isSelected());
 

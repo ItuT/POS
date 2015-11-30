@@ -8,11 +8,13 @@ import com.floreantpos.actions.SettleTicketAction;
 import com.floreantpos.config.TerminalConfig;
 import com.floreantpos.main.Application;
 import com.floreantpos.model.ActionHistory;
+import com.floreantpos.model.InventoryItem;
 import com.floreantpos.model.MenuCategory;
 import com.floreantpos.model.MenuGroup;
 import com.floreantpos.model.MenuItem;
 import com.floreantpos.model.MenuModifier;
 import com.floreantpos.model.OrderType;
+import com.floreantpos.model.RecepieItem;
 import com.floreantpos.model.Ticket;
 import com.floreantpos.model.TicketItem;
 import com.floreantpos.model.User;
@@ -60,8 +62,13 @@ public class OrderController implements OrderListener, CategorySelectionListener
 
 		TicketItem ticketItem = menuItem.convertToTicketItem();
 		orderView.getTicketView().addTicketItem(ticketItem);
-
-		if (menuItem.hasModifiers()) {
+		
+		 RecepieItem rcp = new RecepieItem();//ticketItem.getItemId()
+		 double count;
+		if(rcp.getInventoryItem().getId() == ticketItem.getItemId())
+		 count = rcp.getInventoryItem().getTotalPackages() - (rcp.getPercentage()/100)*ticketItem.getItemCount(); 
+			 
+		 if (menuItem.hasModifiers()) {
 			ModifierView modifierView = orderView.getModifierView();
 			modifierView.setMenuItem(menuItem, ticketItem);
 			orderView.showView(ModifierView.VIEW_NAME);

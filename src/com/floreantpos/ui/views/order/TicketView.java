@@ -17,6 +17,7 @@ import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
@@ -41,6 +42,7 @@ import com.floreantpos.model.ITicketItem;
 import com.floreantpos.model.MenuCategory;
 import com.floreantpos.model.MenuGroup;
 import com.floreantpos.model.MenuItem;
+import com.floreantpos.model.Recepie;
 import com.floreantpos.model.Ticket;
 import com.floreantpos.model.TicketItem;
 import com.floreantpos.model.TicketItemCookingInstruction;
@@ -198,6 +200,16 @@ public class TicketView extends JPanel {
 			_menuItem = _menuItemList.get(0);// getSimilar(_barcode, null).get(0);	
 			//System.out.println(_menuItem.getName());
 			//System.out.println(_menuItem.getDisplayName());
+			Recepie _menuItemRcp = _menuItem.getRecepie();
+			if(_menuItemRcp != null)
+			{
+				
+				Integer packagesRemaining = _menuItemRcp.getRecepieItems().get(0).getInventoryItem().getTotalPackages();
+				if (packagesRemaining != null)
+					//JOptionPane.showMessageDialog(this, packagesRemaining + " Remaining");
+					System.out.println(packagesRemaining + " Remaining");
+			//	POSMessageDialog.showMessage(packagesRemaining + " Remaining"); //$NON-NLS-1$
+			}
 			
 			itemSelectionListener.itemSelected(_menuItem);
 		}

@@ -48,6 +48,7 @@ public class InventoryItemExplorer extends TransparentPanel {
 		tableModel2.addColumn("Stock Name","name");
 		tableModel2.addColumn("Package Barcode","packageBarcode");
 		tableModel2.addColumn("Unit Barcode","unitBarcode");
+		tableModel2.addColumn("Total Packages","totalPackages");
 		
 		tableModel2.addRows(InventoryItemDAO.getInstance().findAll());
 		table = new JXTable(tableModel2);

@@ -50,7 +50,7 @@ public class MenuItemExplorer extends TransparentPanel {
 		tableModel.addColumn(POSConstants.DISCOUNT.toUpperCase() + "(%)", "discountRate"); //$NON-NLS-1$ //$NON-NLS-2$
 		tableModel.addColumn(POSConstants.FOOD_GROUP.toUpperCase(), "parent"); //$NON-NLS-1$
 		tableModel.addColumn(POSConstants.TAX.toUpperCase(), "tax"); //$NON-NLS-1$
-		//tableModel.addColumn("RECEPIE", "recepie"); //$NON-NLS-1$
+		tableModel.addColumn("RECEPIE", "recepie"); //$NON-NLS-1$
 		//tableModel.addColumn(POSConstants.SORT_ORDER.toUpperCase(), "sortOrder"); //$NON-NLS-1$
 		//tableModel.addColumn(POSConstants.BUTTON_COLOR.toUpperCase(), "buttonAsColor"); //$NON-NLS-1$
 		//tableModel.addColumn(POSConstants.IMAGE.toUpperCase(), "imageAsIcon");

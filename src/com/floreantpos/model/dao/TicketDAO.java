@@ -60,7 +60,7 @@ public class TicketDAO extends BaseTicketDAO {
 		Transaction tx = null;
 
 		try {
-
+			
 			session = createNewSession();
 			tx = session.beginTransaction();
 
@@ -608,13 +608,16 @@ public class TicketDAO extends BaseTicketDAO {
 	}
 
 	private void adjustInventoryItems(Session session, Ticket ticket) {
+		
 		List<TicketItem> ticketItems = ticket.getTicketItems();
 		if (ticketItems == null) {
+			System.out.println("**************nuuuullllll*************** ");
 			return;
 		}
 
 		for (TicketItem ticketItem : ticketItems) {
 			if (ticketItem.isInventoryHandled()) {
+				System.out.println("**************handleddddd*************** ");
 				continue;
 			}
 
@@ -622,25 +625,49 @@ public class TicketDAO extends BaseTicketDAO {
 			MenuItem menuItem = MenuItemDAO.getInstance().get(menuItemId);
 
 			if (menuItem == null) {
+				System.out.println("**************menu nullll*************** ");
 				continue;
 			}
 
 			Recepie recepie = menuItem.getRecepie();
 
 			if (recepie == null) {
+				System.out.println("**************recepie null*************** ");
 				continue;
 			}
 
 			List<RecepieItem> recepieItems = recepie.getRecepieItems();
 			for (RecepieItem recepieItem : recepieItems) {
 				if (!recepieItem.isInventoryDeductable()) {
+					System.out.println("**************is not deductable*************** ");
 					continue;
 				}
-
 				InventoryItem inventoryItem = recepieItem.getInventoryItem();
-				inventoryItem.setTotalPackages(inventoryItem.getTotalPackages() - ticketItem.getItemCount());
-				Double totalRecepieUnits = inventoryItem.getTotalRecepieUnits();
-				inventoryItem.setTotalRecepieUnits(totalRecepieUnits - ticketItem.getItemCount());
+				
+				int _itemcount = ticketItem.getItemCount();
+				int _totalInvPackages = inventoryItem.getTotalPackages();
+				Double _unitsPerPackages = inventoryItem.getUnitPerPackage();
+				Double _totalRecepieUnits = inventoryItem.getTotalRecepieUnits();
+				
+				// total items
+				inventoryItem.setTotalRecepieUnits(_totalRecepieUnits - _itemcount);
+				
+				//total packages
+				int _packagesBeingSold = 0;
+				
+				if(_unitsPerPackages != 0)
+				_packagesBeingSold = (int) (_itemcount/_unitsPerPackages);
+				
+				if (_itemcount % _unitsPerPackages > 0)
+					_packagesBeingSold++;//add to the to be subracted packages because one is now less than a package
+				inventoryItem.setTotalPackages(inventoryItem.getTotalPackages() - _itemcount);
+				
+				//System.out.println("inventory packages " + inventoryItem.getTotalPackages());
+				//System.out.println("tickett item count " + ticketItem.getItemCount());
+				
+				
+				
+				
 
 				session.saveOrUpdate(inventoryItem);
 
@@ -651,7 +678,12 @@ public class TicketDAO extends BaseTicketDAO {
 				transaction.setQuantity(ticketItem.getItemCount());
 				transaction.setRemark(Messages.getString("TicketDAO.0") + ticketItem.getName() + Messages.getString("TicketDAO.11") + ticket.getId()); //$NON-NLS-1$ //$NON-NLS-2$
 
+				
+				//InventoryItemDAO InvItDAO = new InventoryItemDAO();
+				System.out.println("Total Packages ");
+				System.out.println("Total Recepie Units ");
 				session.save(transaction);
+				//InvItDAO.saveOrUpdate(inventoryItem);
 			}
 
 			ticketItem.setInventoryHandled(true);

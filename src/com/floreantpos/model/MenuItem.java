@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.StringUtils;
+import org.eclipse.jdt.internal.compiler.flow.FinallyFlowContext;
 
 import com.floreantpos.config.TerminalConfig;
 import com.floreantpos.main.Application;
@@ -133,9 +134,33 @@ public class MenuItem extends BaseMenuItem {
 	}
 
 	public TicketItem convertToTicketItem() {
+		
+		int numOfUnitsToDeduct = 1;
+		try
+		{
+			Recepie recepie = getRecepie();
+			if (recepie != null)
+			{
+				
+				List<RecepieItem> recepieItems = recepie.getRecepieItems();
+				for (RecepieItem recepieItem : recepieItems) //assumption is that it will have just one recepie item
+				{
+					if(this.barcode.matches(recepieItem.getInventoryItem().getPackageBarcode()))//if package
+					{
+						Double percentage = recepieItem.getPercentage();
+						numOfUnitsToDeduct = percentage.intValue();
+					}
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			
+		}
+		
 		TicketItem ticketItem = new TicketItem();
 		ticketItem.setItemId(this.getId());
-		ticketItem.setItemCount(1);
+		ticketItem.setItemCount(ticketItem.getItemCount() + 1*numOfUnitsToDeduct);
 		ticketItem.setName(this.getDisplayName());
 		ticketItem.setGroupName(this.getParent().getDisplayName());
 		ticketItem.setCategoryName(this.getParent().getParent().getDisplayName());
@@ -152,7 +177,7 @@ public class MenuItem extends BaseMenuItem {
 		}
 		ticketItem.setPrinterGroup(this.getPrinterGroup());
 
-		Recepie recepie = getRecepie();
+		/*Recepie recepie = getRecepie();
 		if (recepie != null) {
 			List<RecepieItem> recepieItems = recepie.getRecepieItems();
 			for (RecepieItem recepieItem : recepieItems) {
@@ -163,9 +188,10 @@ public class MenuItem extends BaseMenuItem {
 
 			}
 
-		}
+		}*/
 
 		return ticketItem;
+		
 	}
 
 	public boolean hasModifiers() {
