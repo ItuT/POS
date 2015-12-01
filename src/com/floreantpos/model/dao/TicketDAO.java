@@ -662,13 +662,10 @@ public class TicketDAO extends BaseTicketDAO {
 					_packagesBeingSold++;//add to the to be subracted packages because one is now less than a package
 				inventoryItem.setTotalPackages(inventoryItem.getTotalPackages() - _itemcount);
 				
-				//System.out.println("inventory packages " + inventoryItem.getTotalPackages());
-				//System.out.println("tickett item count " + ticketItem.getItemCount());
+				System.out.println("inventory packages " + _totalInvPackages);
+				System.out.println("inventory units " + _totalRecepieUnits);
+				System.out.println("tickett item count " + _itemcount);
 				
-				
-				
-				
-
 				session.saveOrUpdate(inventoryItem);
 
 				InventoryTransaction transaction = new InventoryTransaction();
@@ -679,11 +676,11 @@ public class TicketDAO extends BaseTicketDAO {
 				transaction.setRemark(Messages.getString("TicketDAO.0") + ticketItem.getName() + Messages.getString("TicketDAO.11") + ticket.getId()); //$NON-NLS-1$ //$NON-NLS-2$
 
 				
-				//InventoryItemDAO InvItDAO = new InventoryItemDAO();
-				System.out.println("Total Packages ");
-				System.out.println("Total Recepie Units ");
+				InventoryItemDAO InvItDAO = new InventoryItemDAO();
+				//System.out.println("Total Packages ");
+				//System.out.println("Total Recepie Units ");
 				session.save(transaction);
-				//InvItDAO.saveOrUpdate(inventoryItem);
+				InvItDAO.saveOrUpdate(inventoryItem);
 			}
 
 			ticketItem.setInventoryHandled(true);

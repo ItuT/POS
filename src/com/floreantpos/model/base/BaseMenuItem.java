@@ -91,15 +91,13 @@ public abstract class BaseMenuItem  implements Comparable, Serializable {
 		protected java.lang.Boolean showImageOnly;
 		protected java.lang.Integer stockOnhand;
 		protected java.lang.Double volume;
-		protected java.lang.Integer packageCount;
+		protected java.lang.Integer count;
 
 	// many to one
 	private com.floreantpos.model.MenuGroup parent;
 	private com.floreantpos.model.Tax tax;
 	private com.floreantpos.model.Recepie recepie;
 	private com.floreantpos.model.PrinterGroup printerGroup;
-	private com.floreantpos.model.Stock stock;
-
 	// collections
 	private java.util.List<com.floreantpos.model.MenuItemShift> shifts;
 	private java.util.List<com.floreantpos.model.MenuItemModifierGroup> menuItemModiferGroups;
@@ -393,6 +391,14 @@ public abstract class BaseMenuItem  implements Comparable, Serializable {
 					return recepie;
 			}
 
+	public void getRecepieItemCount () {
+		count = 0;
+		try{
+		count = getRecepie().getRecepieItems().get(0).getInventoryItem().getTotalRecepieUnits().intValue();
+		}
+		catch (Exception e)
+		{}
+		}
 	/**
 	 * Set the value related to the column: RECEPIE
 	 * @param recepie the RECEPIE value

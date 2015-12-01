@@ -17,7 +17,6 @@ import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -36,16 +35,10 @@ import com.floreantpos.Messages;
 import com.floreantpos.POSConstants;
 import com.floreantpos.bo.ui.BOMessageDialog;
 import com.floreantpos.main.Application;
-import com.floreantpos.model.MenuGroup;
 import com.floreantpos.model.MenuItem;
-import com.floreantpos.model.dao.MenuGroupDAO;
 import com.floreantpos.model.dao.MenuItemDAO;
 import com.floreantpos.swing.BeanTableModel;
-import com.floreantpos.swing.ListTableModel;
 import com.floreantpos.swing.TransparentPanel;
-import com.floreantpos.ui.dialog.BeanEditorDialog;
-import com.floreantpos.ui.dialog.ConfirmDeleteDialog;
-import com.floreantpos.ui.model.MenuItemForm;
 import com.floreantpos.ui.views.order.actions.ItemSelectionListener;
 
 public class MenuListView extends TransparentPanel implements ActionListener, ListSelectionListener {
@@ -69,7 +62,8 @@ public class MenuListView extends TransparentPanel implements ActionListener, Li
 		//tableModel.addColumn(POSConstants.SORT_ORDER.toUpperCase(), "sortOrder"); //$NON-NLS-1$
 		//tableModel.addColumn(POSConstants.BUTTON_COLOR.toUpperCase(), "buttonAsColor"); //$NON-NLS-1$
 		//tableModel.addColumn(POSConstants.IMAGE.toUpperCase(), "imageAsIcon");
-
+		tableModel.addColumn("COUNT", "count");
+		
 		tableModel.addRows(MenuItemDAO.getInstance().findAll());
 
 		table = new JXTable(tableModel);
