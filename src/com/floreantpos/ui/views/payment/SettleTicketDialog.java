@@ -47,7 +47,6 @@ import com.floreantpos.ui.dialog.CouponAndDiscountDialog;
 import com.floreantpos.ui.dialog.DiscountListDialog;
 import com.floreantpos.ui.dialog.POSDialog;
 import com.floreantpos.ui.dialog.POSMessageDialog;
-import com.floreantpos.ui.dialog.PaymentTypeSelectionDialog;
 import com.floreantpos.ui.dialog.TransactionCompletionDialog;
 import com.floreantpos.ui.views.SwitchboardView;
 import com.floreantpos.ui.views.TicketDetailView;
@@ -209,6 +208,7 @@ public class SettleTicketDialog extends POSDialog implements CardInputListener {
 		}
 	}// GEN-LAST:event_btnViewDiscountsdoViewDiscounts
 
+	@SuppressWarnings("static-access")
 	public void doSettle() {
 		try {
 			if (ticket == null)

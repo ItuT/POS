@@ -23,7 +23,6 @@ import javax.swing.UIManager;
 
 import net.miginfocom.swing.MigLayout;
 
-import com.floreantpos.Messages;
 import com.floreantpos.PosException;
 import com.floreantpos.model.MenuItem;
 import com.floreantpos.model.MenuItemModifierGroup;

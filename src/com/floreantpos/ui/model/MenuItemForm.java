@@ -87,6 +87,7 @@ public class MenuItemForm extends BeanEditor<MenuItem> implements ActionListener
 		this(new MenuItem());
 	}
 
+	@SuppressWarnings("unused")
 	public MenuItemForm(MenuItem menuItem) throws Exception {
 		initComponents();
 

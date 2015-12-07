@@ -3,16 +3,20 @@ package com.floreantpos.util;
 import jssc.SerialPort;
 import jssc.SerialPortException;
 
-import com.floreantpos.Messages;
 import com.floreantpos.config.TerminalConfig;
 
+@SuppressWarnings("unused")
 public class DrawerUtil {
 	/* fields */
 
+
 	private boolean escp24pin; //boolean to indicate whether the printer is a 24 pin esc/p2 epson
 
+
 	private static int MAX_ADVANCE_9PIN = 216; //for 24/48 pin esc/p2 printers this should be 180
+
 	private static int MAX_ADVANCE_24PIN = 180;
+
 	private static int MAX_UNITS = 127; //for vertical positioning range is between 0 - 255 (0 <= n <= 255) according to epson ref. but 255 gives weird errors at 1.5f, 127 as max (0 - 128) seems to be working
 	private static final float CM_PER_INCH = 2.54f;
 

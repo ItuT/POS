@@ -19,7 +19,6 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 import net.sf.jasperreports.engine.JasperPrint;
 
-import com.floreantpos.Messages;
 import com.floreantpos.main.Application;
 import com.floreantpos.model.Ticket;
 import com.floreantpos.report.ReceiptPrintService;

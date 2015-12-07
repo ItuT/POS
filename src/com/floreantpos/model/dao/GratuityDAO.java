@@ -45,6 +45,7 @@ public class GratuityDAO extends BaseGratuityDAO {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	public void payGratuities(List<Gratuity> gratuities) {
 		Session session = null;
 		Transaction tx = null;

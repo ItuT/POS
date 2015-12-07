@@ -274,6 +274,7 @@ public class DatabaseConfigurationDialog extends POSDialog implements ActionList
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void isAuthorizedToPerformDbChange() {
 		DatabaseUtil.initialize();
 		

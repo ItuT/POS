@@ -8,8 +8,6 @@ import javax.swing.ImageIcon;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang.StringUtils;
-import org.eclipse.jdt.internal.compiler.flow.FinallyFlowContext;
-
 import com.floreantpos.config.TerminalConfig;
 import com.floreantpos.main.Application;
 import com.floreantpos.model.base.BaseMenuItem;

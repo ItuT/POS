@@ -440,7 +440,7 @@ public class Application {
 		return getInstance().posWindow;
 	}
 	
-	public static void getTakeOutView() {
+	public void getTakeOutView() {
 		getInstance().sbv.goToTakeOutView();
 	}
 

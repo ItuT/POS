@@ -607,6 +607,7 @@ public class TicketDAO extends BaseTicketDAO {
 		return instance;
 	}
 
+	@SuppressWarnings("unused")
 	private void adjustInventoryItems(Session session, Ticket ticket) {
 		
 		List<TicketItem> ticketItems = ticket.getTicketItems();

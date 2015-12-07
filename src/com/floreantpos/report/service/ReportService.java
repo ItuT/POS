@@ -377,6 +377,7 @@ public class ReportService {
 		return getDoubleAmount(criteria.uniqueResult());
 	}
 	
+	@SuppressWarnings("unused")
 	private double calculateCashReceipt(Session session, Date fromDate, Date toDate) {
 		//cash receipt
 		Criteria criteria = session.createCriteria(CashTransaction.class);
@@ -389,6 +390,7 @@ public class ReportService {
 		return getDoubleAmount(criteria.uniqueResult());
 	}
 	
+	@SuppressWarnings("unused")
 	private double calculateCreditCardReceipt(Session session, Date fromDate, Date toDate) {
 		//cash receipt
 		Criteria criteria = session.createCriteria(CashTransaction.class);
@@ -401,6 +403,7 @@ public class ReportService {
 		return getDoubleAmount(criteria.uniqueResult());
 	}
 	
+	@SuppressWarnings("unused")
 	private double calculateGiftCertSoldAmount(Session session, Date fromDate, Date toDate) {
 		//cash receipt
 		Criteria criteria = session.createCriteria(GiftCertificateTransaction.class);

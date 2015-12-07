@@ -6,6 +6,7 @@ import org.hibernate.criterion.Order;
 
 import sun.security.jca.GetInstance;
 
+@SuppressWarnings("unused")
 public class BaseStockDAO extends com.floreantpos.model.dao._RootDAO {
 
 	public static StockDAO instance;

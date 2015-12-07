@@ -646,6 +646,7 @@ public class TicketView extends JPanel {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void updateSelectionView() {
 		Object selectedObject = ticketViewerTable.getSelected();
 
@@ -678,12 +679,12 @@ public class TicketView extends JPanel {
 				if (menuItem != null) {
 					MenuGroup menuGroup = menuItem.getParent();
 					MenuItemView itemView = OrderView.getInstance().getItemView();
-					if (!menuGroup.equals(itemView.getMenuGroup())) {
+					/*if (!menuGroup.equals(itemView.getMenuGroup())) {
 						itemView.setMenuGroup(menuGroup);
-					}
+					}*/
 
 					orderView.showView(MenuItemView.VIEW_NAME);
-					itemView.selectItem(menuItem);
+					//itemView.selectItem(menuItem);
 
 					MenuCategory menuCategory = menuGroup.getParent();
 					orderView.getCategoryView().setSelectedCategory(menuCategory);

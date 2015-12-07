@@ -20,6 +20,7 @@ import com.jgoodies.looks.plastic.PlasticToggleButtonUI;
 public class POSToggleButtonUI extends PlasticToggleButtonUI {
 	private static final POSToggleButtonUI INSTANCE = new POSToggleButtonUI();
 	
+	@SuppressWarnings("unused")
 	private final static Border pressedBorder = BorderFactory.createLineBorder(Color.black, 5);
 	private final static Border defaultBorder = UIManager.getBorder("Button.border"); //$NON-NLS-1$
 

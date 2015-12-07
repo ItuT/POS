@@ -23,12 +23,8 @@ import org.jdesktop.swingx.JXTable;
 import com.floreantpos.Messages;
 import com.floreantpos.POSConstants;
 import com.floreantpos.bo.ui.BOMessageDialog;
-import com.floreantpos.main.Application;
 import com.floreantpos.model.InventoryItem;
-import com.floreantpos.model.MenuGroup;
-import com.floreantpos.model.MenuItem;
 import com.floreantpos.model.dao.InventoryItemDAO;
-import com.floreantpos.model.dao.MenuGroupDAO;
 import com.floreantpos.swing.BeanTableModel;
 import com.floreantpos.swing.TransparentPanel;
 import com.floreantpos.ui.dialog.BeanEditorDialog;
@@ -97,6 +93,7 @@ public class InventoryItemExplorer extends TransparentPanel {
 
 			searchBttn.addActionListener(new ActionListener() {
 
+				@SuppressWarnings("unused")
 				public void actionPerformed(ActionEvent e) {
 
 					String txName = nameField.getText();

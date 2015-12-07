@@ -8,7 +8,6 @@ import com.floreantpos.actions.SettleTicketAction;
 import com.floreantpos.config.TerminalConfig;
 import com.floreantpos.main.Application;
 import com.floreantpos.model.ActionHistory;
-import com.floreantpos.model.InventoryItem;
 import com.floreantpos.model.MenuCategory;
 import com.floreantpos.model.MenuGroup;
 import com.floreantpos.model.MenuItem;
@@ -49,13 +48,17 @@ public class OrderController implements OrderListener, CategorySelectionListener
 	public void categorySelected(MenuCategory foodCategory) {
 		orderView.showView(GroupView.VIEW_NAME);
 		orderView.getGroupView().setMenuCategory(foodCategory);
+		orderView.showView(MenuListView.VIEW_NAME);
 	}
 
 	public void groupSelected(MenuGroup foodGroup) {
 		orderView.showView(MenuListView.VIEW_NAME);
-		orderView.getItemView().setMenuGroup(foodGroup);
+		//orderView.getItemView().setMenuGroup(foodGroup);
+		orderView.getListView().setEnabled(true);
+		orderView.showView(MenuListView.VIEW_NAME);
 	}
 
+	@SuppressWarnings("unused")
 	public void itemSelected(MenuItem menuItem) {
 		MenuItemDAO dao = new MenuItemDAO();
 		menuItem = dao.initialize(menuItem);
@@ -69,10 +72,11 @@ public class OrderController implements OrderListener, CategorySelectionListener
 		 count = rcp.getInventoryItem().getTotalPackages() - (rcp.getPercentage()/100)*ticketItem.getItemCount(); 
 			 
 		 if (menuItem.hasModifiers()) {
-			ModifierView modifierView = orderView.getModifierView();
-			modifierView.setMenuItem(menuItem, ticketItem);
-			orderView.showView(ModifierView.VIEW_NAME);
+		//	ModifierView modifierView = orderView.getModifierView();
+		//	modifierView.setMenuItem(menuItem, ticketItem);
+			orderView.showView(MenuListView.VIEW_NAME);
 		}
+		 orderView.showView(MenuListView.VIEW_NAME);
 	}
 
 	public void modifierSelected(MenuItem parent, MenuModifier modifier) {
@@ -86,23 +90,27 @@ public class OrderController implements OrderListener, CategorySelectionListener
 		//		itemModifier.setTaxRate(modifier.getTax() == null ? 0 : modifier.getTax().getRate());
 		//		
 		//		orderView.getTicketView().addModifier(itemModifier);
+		orderView.showView(MenuListView.VIEW_NAME);
 	}
 
 	public void itemSelectionFinished(MenuGroup parent) {
 		MenuCategory menuCategory = parent.getParent();
 		GroupView groupView = orderView.getGroupView();
 		if (!menuCategory.equals(groupView.getMenuCategory())) {
-			groupView.setMenuCategory(menuCategory);
+			//groupView.setMenuCategory(menuCategory);
+			orderView.showView(MenuListView.VIEW_NAME);
 		}
-		orderView.showView(MenuItemView.VIEW_NAME);
+		orderView.showView(MenuListView.VIEW_NAME);
 	}
 
+	@SuppressWarnings("unused")
 	public void modifierSelectionFiniched(MenuItem parent) {
 		MenuGroup menuGroup = parent.getParent();
 		MenuItemView itemView = orderView.getItemView();
-		if (!menuGroup.equals(itemView.getMenuGroup())) {
-			itemView.setMenuGroup(menuGroup);
-		}
+		//if (!menuGroup.equals(itemView.getMenuGroup())) {
+			//itemView.setMenuGroup(menuGroup);
+			//orderView.showView(MenuListView.VIEW_NAME);
+		//}
 		orderView.showView(MenuListView.VIEW_NAME);
 	}
 

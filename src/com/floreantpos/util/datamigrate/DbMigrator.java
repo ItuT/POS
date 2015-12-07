@@ -37,6 +37,7 @@ public class DbMigrator {
 	
 	
 	
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception {
 		DatabaseUtil.initialize();
 		

@@ -70,6 +70,7 @@ public class DatabaseUtil {
 	}
 
 	private static void dropModifiedTimeColumn(Session session) throws SQLException {
+		@SuppressWarnings("deprecation")
 		Connection connection = session.connection();
 		String[] tables = {"CUSTOMER","GRATUITY","INVENTORY_GROUP","INVENTORY_ITEM","INVENTORY_LOCATION",
 				"INVENTORY_META_CODE","INVENTORY_TRANSACTION","INVENTORY_TRANSACTION_TYPE","INVENTORY_UNIT",

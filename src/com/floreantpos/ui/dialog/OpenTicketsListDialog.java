@@ -271,6 +271,7 @@ public class OpenTicketsListDialog extends POSDialog {
 		}
 	}//GEN-LAST:event_doTransferServer
 
+	@SuppressWarnings("unused")
 	private void doPrintTicket(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doPrintTicket
 		JOptionPane.showMessageDialog(this, Messages.getString("OpenTicketsListDialog.6")); //$NON-NLS-1$
 	}//GEN-LAST:event_doPrintTicket

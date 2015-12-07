@@ -146,6 +146,7 @@ public class DataExportAction extends AbstractAction {
 		return fileChooser;
 	}
 
+	@SuppressWarnings("unused")
 	private void fixMenuItemModifierGroups() {
 		MenuItemModifierGroupDAO menuItemModifierGroupDAO = MenuItemModifierGroupDAO.getInstance();
 		Session session = menuItemModifierGroupDAO.createNewSession();

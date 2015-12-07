@@ -8,7 +8,6 @@ import javax.swing.JTabbedPane;
 
 import com.floreantpos.bo.ui.BackOfficeWindow;
 import com.floreantpos.bo.ui.explorer.InventoryItemExplorer;
-import com.floreantpos.bo.ui.explorer.MenuItemExplorer;
 
 public class InventoryExplorerAction extends AbstractAction {
 
